@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Cultrd — Home</title>
+<meta name="description" content="Get Cultrd — a monthly online newspaper covering nature, music, literature, theatre, fashion, language, art, history, and film.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="gc-topbar">
+  <div class="gc-nav-inner">
+    <a class="brand-link" href="index.html">Get Cultrd</a>
+    <ul class="gc-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="archive.html">Archive</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="gc-masthead">
+  <div class="gc-masthead-box">
+    <h1 class="gc-masthead-title">Get Cultrd</h1>
+  </div>
+  <p class="gc-masthead-tagline">Nine stories, one dragon — a monthly dispatch, est. 2026</p>
+</header>
+<div class="gc-squiggle"></div>
+
+<div class="tarot-feature-wrap">
+  <div>
+    <span class="tarot-feature-eyebrow">This Month's Feature</span>
+    <div id="featureCardSlot"></div>
+  </div>
+</div>
+
+<div class="tarot-grid" id="tarotGrid"></div>
+
+<footer class="gc-footer">
+  &copy; 2026 GET CULTRD &middot; Updated monthly &middot; Placeholder text &amp; images throughout — swap freely.
+</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+  const current = MONTHS.find(m => m.current);
+  renderHomeLayout(current.key);
+</script>
+</body>
+</html>

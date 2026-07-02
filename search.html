@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Cultrd — Search</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="gc-topbar">
+  <div class="gc-nav-inner">
+    <a class="brand-link" href="index.html">Get Cultrd</a>
+    <ul class="gc-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="archive.html">Archive</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="gc-masthead small">
+  <div class="gc-masthead-box"><h1 class="gc-masthead-title">Search</h1></div>
+  <p class="gc-masthead-tagline">Find anything across every issue, archive, and page.</p>
+</header>
+<div class="gc-squiggle"></div>
+
+<div class="gc-section">
+  <div class="search-bar-wrap">
+    <input type="text" id="searchInput" placeholder="Search articles, categories, games, and more..." autofocus>
+  </div>
+  <div id="searchResults"></div>
+</div>
+
+<footer class="gc-footer">&copy; 2026 GET CULTRD</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+  const resultsEl = document.getElementById("searchResults");
+  const inputEl = document.getElementById("searchInput");
+
+  function matchesQuery(haystack, q) {
+    return haystack.toLowerCase().includes(q);
+  }
+
+  function searchResultHTML(a) {
+    return `
+      <a class="search-result" href="${articleUrl(a)}">
+        <img src="${a.cover}" alt="${a.categoryName} cover">
+        <div>
+          <span class="category-tag">${a.categoryName} &middot; ${a.monthLabel}</span>
+          <h4 style="margin:0.3rem 0 0;">${a.title}</h4>
+          <p style="margin:0.2rem 0 0; font-size:0.85rem; color:var(--ink-soft);">${a.excerpt}</p>
+        </div>
+      </a>`;
+  }
+
+  function extraResultHTML(e) {
+    return `
+      <a class="search-result" href="${e.url}">
+        <div>
+          <span class="category-tag">${e.type}</span>
+          <h4 style="margin:0.3rem 0 0;">${e.title}</h4>
+          <p style="margin:0.2rem 0 0; font-size:0.85rem; color:var(--ink-soft);">${e.snippet}</p>
+        </div>
+      </a>`;
+  }
+
+  function runSearch(rawQuery) {
+    const q = rawQuery.trim().toLowerCase();
+    if (!q) {
+      resultsEl.innerHTML = `<div class="search-empty">Start typing to search articles, archive issues, and games/about pages.</div>`;
+      return;
+    }
+
+    const articleMatches = ARTICLES.filter(a =>
+      matchesQuery(a.title, q) ||
+      matchesQuery(a.categoryName, q) ||
+      matchesQuery(a.excerpt, q) ||
+      matchesQuery(a.monthLabel, q)
+    );
+
+    const extraMatches = SITE_EXTRAS.filter(e =>
+      matchesQuery(e.title, q) || matchesQuery(e.snippet, q) || matchesQuery(e.type, q)
+    );
+
+    if (!articleMatches.length && !extraMatches.length) {
+      resultsEl.innerHTML = `<div class="search-empty">No results for "${rawQuery}". Try a category name like "film" or a month like "June".</div>`;
+      return;
+    }
+
+    resultsEl.innerHTML = articleMatches.map(searchResultHTML).join("") + extraMatches.map(extraResultHTML).join("");
+  }
+
+  inputEl.addEventListener("input", () => runSearch(inputEl.value));
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("q")) inputEl.value = params.get("q");
+  runSearch(inputEl.value);
+</script>
+</body>
+</html>

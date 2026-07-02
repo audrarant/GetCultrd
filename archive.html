@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Cultrd — Archive</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="gc-topbar">
+  <div class="gc-nav-inner">
+    <a class="brand-link" href="index.html">Get Cultrd</a>
+    <ul class="gc-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="archive.html">Archive</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="gc-masthead small">
+  <div class="gc-masthead-box"><h1 class="gc-masthead-title">Archive</h1></div>
+  <p class="gc-masthead-tagline">Every issue, organized by month.</p>
+</header>
+<div class="gc-squiggle"></div>
+
+<div class="gc-section" id="archiveContainer"></div>
+
+<footer class="gc-footer">&copy; 2026 GET CULTRD &middot; Placeholder text &amp; images throughout.</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script>
+  function renderArchive() {
+    const container = document.getElementById("archiveContainer");
+    container.innerHTML = MONTHS.map((month, i) => `
+      <div class="month-group">
+        <button class="month-accordion-btn" onclick="toggleMonth(${i})">
+          <span>${month.label}${month.current ? " — Current Issue" : ""}</span>
+          <span id="monthArrow${i}">${i === 0 ? "▲" : "▼"}</span>
+        </button>
+        <div class="month-articles ${i === 0 ? "open" : ""}" id="monthGroup${i}">
+          ${getArticlesByMonth(month.key).map(archiveCardHTML).join("")}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function toggleMonth(i) {
+    const group = document.getElementById(`monthGroup${i}`);
+    const arrow = document.getElementById(`monthArrow${i}`);
+    const isOpen = group.classList.toggle("open");
+    arrow.textContent = isOpen ? "▲" : "▼";
+  }
+
+  renderArchive();
+</script>
+</body>
+</html>

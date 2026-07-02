@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Cultrd — Games</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Baloo+2:wght@500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="gc-topbar">
+  <div class="gc-nav-inner">
+    <a class="brand-link" href="index.html">Get Cultrd</a>
+    <ul class="gc-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="archive.html">Archive</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="gc-masthead small">
+  <div class="gc-masthead-box"><h1 class="gc-masthead-title">Games</h1></div>
+  <p class="gc-masthead-tagline">This month's playroom — think, doodle, and dash across the globe.</p>
+</header>
+<div class="gc-squiggle"></div>
+
+<div class="gc-section">
+
+  <div class="gc-block tint-pink">
+    <h2>Would You Rather</h2>
+    <img class="scatter-img float-right" src="https://picsum.photos/seed/games-wyr/300/220" alt="">
+    <div class="wyr-card">
+      <div class="wyr-option a" id="wyrOptionA"></div>
+      <div class="wyr-vs">or</div>
+      <div class="wyr-option b" id="wyrOptionB"></div>
+    </div>
+    <div class="wyr-nav"><button class="gc-btn" id="wyrNextBtn">Next Question</button></div>
+    <div class="interview-strip">
+      <strong style="font-size:0.85rem;">Readers say:</strong>
+      <div id="interviewList"></div>
+    </div>
+  </div>
+
+  <div class="gc-block word-of-month" id="wordOfMonthPanel"></div>
+
+  <div class="gc-block tint-yellow">
+    <h2>Culture Crossword</h2>
+    <div id="crosswordArea"></div>
+    <div class="crossword-actions">
+      <button class="gc-btn" id="checkCrosswordBtn">Check Answers</button>
+      <span id="crosswordResult" style="margin-left:0.8rem; font-weight:700;"></span>
+    </div>
+  </div>
+
+  <div class="gc-block">
+    <h2>Printable Coloring Sheet</h2>
+    <p class="gc-block-lede">A fresh coloring sheet every issue — print it out, color it in, tag us in the result.</p>
+    <div class="coloring-sheet-preview" id="printArea">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="150" cy="150" r="100" fill="none" stroke="black" stroke-width="3"/>
+        <circle cx="150" cy="150" r="65" fill="none" stroke="black" stroke-width="3"/>
+        <circle cx="150" cy="150" r="30" fill="none" stroke="black" stroke-width="3"/>
+        <path d="M150 50 L150 250 M50 150 L250 150 M79 79 L221 221 M221 79 L79 221" stroke="black" stroke-width="2"/>
+        <circle cx="150" cy="50" r="10" fill="none" stroke="black" stroke-width="2"/>
+        <circle cx="150" cy="250" r="10" fill="none" stroke="black" stroke-width="2"/>
+        <circle cx="50" cy="150" r="10" fill="none" stroke="black" stroke-width="2"/>
+        <circle cx="250" cy="150" r="10" fill="none" stroke="black" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="coloring-actions"><button class="gc-btn secondary" onclick="window.print()">Print This Sheet</button></div>
+  </div>
+
+  <div class="gc-block tint-pink">
+    <h2>Cultrd Runner: Around the World</h2>
+    <img class="scatter-img float-left" src="https://picsum.photos/seed/games-runner/300/220" alt="">
+    <p class="gc-block-lede">Jump the obstacles and pass through every culture checkpoint. Tap / click / press Space to jump.</p>
+    <div class="game-score">Score: <span id="gameScore">0</span> &nbsp;|&nbsp; Best: <span id="gameBest">0</span></div>
+    <canvas id="gameCanvas" width="800" height="260"></canvas>
+    <div class="game-controls">
+      <button class="gc-btn" id="gameStartBtn">Start / Restart</button>
+    </div>
+  </div>
+
+</div>
+
+<footer class="gc-footer">&copy; 2026 Get Cultrd. Placeholder puzzle content — swap freely.</footer>
+
+<script src="data.js"></script>
+<script src="main.js"></script>
+<script src="games.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
